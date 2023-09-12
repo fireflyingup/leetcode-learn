@@ -50,7 +50,7 @@ class longestPalindromicSubstring {
     class Solution {
         public String longestPalindrome(String s) {
             int length = s.length();
-            
+
             for (int i = 0; i < length; i++) {
 
             }
