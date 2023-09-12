@@ -42,7 +42,7 @@ class longestPalindromicSubstring {
 
     public static void main(String[] args) {
         Solution solution = new longestPalindromicSubstring().new Solution();
-        String s = solution.longestPalindrome("cbbd");
+        String s = solution.longestPalindrome("aaaa");
         System.out.println(s);
     }
 
@@ -51,9 +51,45 @@ class longestPalindromicSubstring {
         public String longestPalindrome(String s) {
             int length = s.length();
 
-            for (int i = 0; i < length; i++) {
+            return s.substring(0);
+        }
 
+        /**
+         * 两边回溯
+         * @param s
+         * @return
+         */
+        public String longestPalindrome2(String s) {
+            int length = s.length();
+            int left = 0;
+            int right = 0;
+            int len = 0;
+            int targetLen = 0;
+            int start = 0; int end = 0;
+            for (int i = 0; i < length; i++) {
+                left = i;
+                len = 0;
+                while (left >= 0 && s.charAt(left) == s.charAt(i)) {
+                    left--;
+                    len++;
+                }
+                right = i;
+                while (right <= length - 1 && s.charAt(right) == s.charAt(i)) {
+                    right++;
+                    len++;
+                }
+                while (left >= 0 && right <= length - 1 && s.charAt(left) == s.charAt(right)) {
+                    left--;
+                    right++;
+                    len += 2;
+                }
+                if (len > targetLen) {
+                    targetLen = len;
+                    start = left + 1;
+                    end = right - 1;
+                }
             }
+            return s.substring(start, end + 1);
         }
 
         public String longestPalindromeSelf(String s) {
