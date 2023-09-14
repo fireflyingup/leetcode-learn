@@ -32,6 +32,8 @@
 
 package leetcode.editor.cn;
 
+import java.util.Arrays;
+
 /**
  * @author fireflying
  */
@@ -42,7 +44,7 @@ class longestPalindromicSubstring {
 
     public static void main(String[] args) {
         Solution solution = new longestPalindromicSubstring().new Solution();
-        String s = solution.longestPalindrome("aaaa");
+        String s = solution.longestPalindrome("babad");
         System.out.println(s);
     }
 
@@ -50,8 +52,23 @@ class longestPalindromicSubstring {
     class Solution {
         public String longestPalindrome(String s) {
             int length = s.length();
-
-            return s.substring(0);
+            boolean[][] dp = new boolean[length][length];
+            int maxLen = 0;
+            int maxStart = 0;
+            int maxEnd = 0;
+            for (int r = 1; r < length; r++) {
+                for (int l = 0; l < r; l++) {
+                    if (s.charAt(l) == s.charAt(r) && ((r - l <= 2) || dp[l+1][r-1])) {
+                        dp[l][r] = true;
+                        if (r - l + 1 > maxLen) {
+                            maxLen = r - l + 1;
+                            maxStart = l;
+                            maxEnd = r;
+                        }
+                    }
+                }
+            }
+            return s.substring(maxStart, maxEnd + 1);
         }
 
         /**
