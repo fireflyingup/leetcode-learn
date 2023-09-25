@@ -60,7 +60,6 @@ class jumpGameIi {
     class Solution {
         public int jump(int[] nums) {
             int length = nums.length;
-
             int right = 0;
             int pos = 0;
             int step = 0;
