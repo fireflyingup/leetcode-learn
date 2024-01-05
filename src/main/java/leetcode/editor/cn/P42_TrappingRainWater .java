@@ -44,14 +44,14 @@ class P42_TrappingRainWater{
 	 public static void main(String[] args) {
 	 	 //测试代码
 	 	 Solution solution = new P42_TrappingRainWater().new Solution();
-		 int trap = solution.trap(new int[]{0,1,0,2,1,0,1,3,2,1,2,1});
+		 int trap = solution.trap1(new int[]{0,1,0,2,1,0,1,3,2,1,2,1});
 		 System.out.println(trap);
 	 }
 	 
 //力扣代码
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int trap(int[] height) {
+    public int trap1(int[] height) {
 		if (height.length < 3) {
 			return 0;
 		}
@@ -78,6 +78,24 @@ class Solution {
 		}
 		return max;
     }
+
+	public int trap(int[] height) {
+		int l = 0, r = height.length - 1;
+		int l_max = height[0], r_max = height[height.length - 1];
+		int res = 0;
+		while (l < r) {
+			l_max = Math.max(l_max, height[l]);
+			r_max = Math.max(r_max, height[r]);
+			if (l_max < r_max) {
+				res += l_max - height[l];
+				l++;
+			} else {
+				res += r_max - height[r];
+				r--;
+			}
+		}
+		return res;
+	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
