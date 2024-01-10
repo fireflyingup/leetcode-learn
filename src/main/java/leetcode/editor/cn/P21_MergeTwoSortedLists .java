@@ -82,15 +82,7 @@ class P21_MergeTwoSortedLists {
             if (list1 == null) return list2;
             if (list2 == null) return list1;
             ListNode target = new ListNode();
-            ListNode current;
-            if (list1.val < list2.val) {
-                current = list1;
-                list1 = list1.next;
-            } else {
-                current = list2;
-                list2 = list2.next;
-            }
-            target.next = current;
+            ListNode current = target;
             for (; ; ) {
                 if (list1 == null) {
                     current.next = list2;
